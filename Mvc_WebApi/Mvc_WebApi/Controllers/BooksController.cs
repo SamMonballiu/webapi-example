@@ -89,5 +89,31 @@ namespace Mvc_WebApi.Controllers
         }
         #endregion
 
+
+        #region POST method
+
+        [HttpPost]
+        //[Route("api/Books/AddNewBook")]
+        public bool AddNewBook(Book book)
+        {
+            books.Add(book);
+            return true;
+        }
+
+        #endregion
+
+        [HttpPut]
+        public List<Book> UpdateBook(int id, Book book)
+        {
+            //try to remove the book with the id from the list.
+            // If it succeeds, add the new book to the list in its place.
+            if (Remove(id) == true)
+            {
+                AddNewBook(book);
+            }
+
+            // return the list of books.
+            return books;
+        }
     }
 }

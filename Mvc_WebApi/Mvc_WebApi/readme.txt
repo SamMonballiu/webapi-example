@@ -45,13 +45,76 @@ Now we will make the GET methods, these are methods that only read data and retu
 	Special notation in Postman: p.e. localhost:50070/api/Books?author=veronique
 
 	To avoid having to use this special notation, we can add a Route attribute above the method name: 
-	[Route("Api/Books/{author}")]
+	[Route("Api/Books/FindByAuthor/{author}")]
 
-	then the request looks like: localhost:50070/api/Books/veronique
+	then the request looks like: localhost:50070/api/Books/FindByAuthor/veronique
 
 
 DELETE METHOD
 *************
 
 - The method to delete a book is named Remove and marked with [HttpDelete]. It returns a boolean so we can let a user know
-	if the book was deleted or not.
+	if the book was deleted or not. We send a DELETE request to Postman: localhost:50070/api/Books/2
+	This will delete the book with Id 2 from the list, if it exists. It will return true or false.
+	
+POST METHOD (CREATE NEW BOOK)
+*****************************
+
+- To add a book to the list, we write a method that takes a Book, adds it to the list and returns true if it worked:
+	
+	public bool AddNewBook(Book book)
+
+	To test this method in Postman, we will have to take a few extra steps:
+	We will send an object in JSON (JavaScript Object Notation) format to our method, and it will be smart enough
+	to transform it into a Book object.
+
+	We will make a POST request to localhost:50070/api/Books, but don't click Send yet.
+	We click on Body -> raw. 
+	In the dropdown on the right, change the type from 'Text' to 'JSON (application/json)'.
+
+	In the textbox we type the following:
+	{
+        "Id": 5,
+        "Title": "Residencia en la Tierra",
+        "Author": "Pablo Neruda",
+        "PublicationYear": 1935,
+        "IsAvailable": true,
+        "CallNumber": "PNResidencia"
+    }
+
+	Then if we hit Send, we should get 'true' and a new book should be added to our list!
+
+	We CAN use a Route attribute to change the route (like [Route("api/Books/AddNewBook")]) but it is not required.
+
+PUT METHOD (UPDATE A BOOK)
+**************************
+
+- To update a book (change title or author etc.) we write a method called UpdateBook marked with [HttpPut]: 
+		
+	public List<Book> UpdateBook(int id, Book book)
+	
+	This method takes an int and a Book object and gives back a List<Book>. We will use the simple method of updating
+	a book: we will delete the book first, and put the 'new' book in its place.
+
+	To test this in Postman, we do the following:
+
+	We want to update the book with id 1
+
+	- PUT request to localhost:50070/api/Books/1
+	- In the body, we put the following:
+		{
+    	"Id": 1,
+    	"Title": "Crepusculario",
+    	"Author": "Pablo Neruda",
+    	"PublicationYear": 1923,
+    	"IsAvailable": true,
+    	"CallNumber": "PNCrepusculario"
+	}
+
+	this will delete the book with id 1 and put this book in its place
+
+
+
+SWASHBUCKLE NUGET PACKAGE
+
+
