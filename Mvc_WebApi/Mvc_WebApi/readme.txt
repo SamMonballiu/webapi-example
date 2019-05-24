@@ -115,6 +115,12 @@ PUT METHOD (UPDATE A BOOK)
 
 
 
-SWASHBUCKLE NUGET PACKAGE
+USING SWASHBUCKLE
+*****************
+
+To show a nice list of the methods in our WebApi, we can install a NuGet package called Swashbuckle. 
+Once it is installed, we can start our WebApi and go to localhost:50070/Swagger
+We can also use this to test all of our methods.
+
 
 
