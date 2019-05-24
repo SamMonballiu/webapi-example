@@ -9,13 +9,19 @@ using System.Threading.Tasks;
 
 namespace OrchestrationLayer
 {
-    public static class BooksService
+    public class BooksService
     {
-        public static async Task<HttpResponseMessage> AddAuthor(string name)
+        private readonly string _baseUrl;
+        public BooksService(string baseUrl)
+        {
+            _baseUrl = baseUrl;
+        }
+
+        public async Task<HttpResponseMessage> AddAuthor(string name)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:51518/");
+                client.BaseAddress = new Uri(_baseUrl);
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -23,25 +29,36 @@ namespace OrchestrationLayer
 
                 try
                 {
-                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Books/CreateAuthor", newAuthor);
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Authors", newAuthor);
                     return response;
-                    //if (response.IsSuccessStatusCode)
-                    //{
-                    //    return true;
-                    //}
-
-                    //else
-                    //{
-                    //    return false;
-                    //}
                 }
-                catch (Exception ex)
-                {
-                    throw;
-                }
-
+                catch (Exception) { throw; }
             }
 
+        }
+
+        public async Task<HttpResponseMessage> CreateNewBookWithAuthor(Author author, string bookName)
+        {
+            var newBook = new Book()
+            {
+                AuthorId = author.Id,
+                Name = bookName,
+                PublicationYear = 2000
+            };
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                try
+                {
+                    HttpResponseMessage response = await client.PostAsJsonAsync("api/Books/AddBookWithAuthor", newBook);
+                    return response;
+                }
+                catch (Exception) { throw; }
+            }
         }
     }
 }

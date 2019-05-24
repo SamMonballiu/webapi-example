@@ -4,6 +4,7 @@ using OrchestrationLayer;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
@@ -35,21 +36,28 @@ namespace BooksWpf
 
         private async void btnAddAuthor_Click(object sender, RoutedEventArgs e)
         {
-            var newName = txtNewAuthor.Text;
-            var response = await BooksService.AddAuthor(newName);
-            if (response.IsSuccessStatusCode)
+            if (txtNewAuthor.Text == String.Empty) { return; }
+            try
             {
-                UpdateComboBoxes();
-                txtNewAuthor.Text = String.Empty;
-            }
+                var service = new BooksService("http://localhost:51518/");
+                var response = await service.AddAuthor(txtNewAuthor.Text);
+                if (response.IsSuccessStatusCode)
+                {
+                    UpdateComboBoxes();
+                    txtNewAuthor.Text = String.Empty;
+                }
 
-            else
-            {
-                MessageBox.Show("An error occured: " + response.ReasonPhrase);
+                else
+                {
+                    MessageBox.Show("An error occured: " + response.ReasonPhrase);
+                }
             }
+            catch (HttpRequestException requestException) { MessageBox.Show(requestException.InnerException.Message, "Error"); }
+            catch (Exception ex) { MessageBox.Show("An error occurred: " + ex.Message); }
+
         }
 
-        
+
 
         private void UpdateComboBoxes()
         {
