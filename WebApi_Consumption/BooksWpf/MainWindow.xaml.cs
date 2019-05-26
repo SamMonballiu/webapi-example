@@ -17,14 +17,16 @@ namespace BooksWpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static DbContext ctx = new BooksContext();
-        IRepository<Book> books = new Repository<Book>(ctx);
-        IRepository<Author> authors = new Repository<Author>(ctx);
+        private DbContext ctx = new BooksContext();
+        IRepository<Book> books;
+        IRepository<Author> authors;
 
         public MainWindow()
         {
             InitializeComponent();
 
+            books = new Repository<Book>(ctx);
+            authors = new Repository<Author>(ctx);
 
             cbAuthors.DisplayMemberPath = "Name";
             cbBooks.DisplayMemberPath = "Name";

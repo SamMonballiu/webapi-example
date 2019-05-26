@@ -17,6 +17,24 @@ namespace OrchestrationLayer
             _baseUrl = baseUrl;
         }
 
+        public async Task<List<Author>> GetAuthors()
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri(_baseUrl);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                try
+                {
+                    HttpResponseMessage response = await client.GetAsync("api/Authors");
+                    var authors = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Author>>(await response.Content.ReadAsStringAsync());
+                    return authors;
+                }
+                catch (Exception) { throw; }
+            }
+        }
+
         public async Task<HttpResponseMessage> AddAuthor(string name)
         {
             using (var client = new HttpClient())

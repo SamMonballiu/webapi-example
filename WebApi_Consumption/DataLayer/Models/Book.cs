@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 
 namespace DataLayer.Models
 {
@@ -16,9 +18,11 @@ namespace DataLayer.Models
         public int PublicationYear { get; set; }
 
         public int AuthorId { get; set; }
-        [ForeignKey("AuthorId")]
-        public Author Author { get; set; }
 
+        [ForeignKey("AuthorId")]
+        [JsonIgnore] // json
+        [IgnoreDataMember] // xml
+        public Author Author { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -26,9 +30,9 @@ namespace DataLayer.Models
 
             List<Func<int, bool>> yearConditions = new List<Func<int, bool>>()
             {
-                (year) => { return DateTime.Now.Year >= 0; },
-                (year) => { return DateTime.Now.Year > year; },
-                (year) => { return year.ToString().Length <= 4; }
+                (year) => DateTime.Now.Year >= 0,
+                (year) => DateTime.Now.Year > year,
+                (year) => year.ToString().Length <= 4,
             };
 
             if (!YearMeetsAllConditions(PublicationYear))

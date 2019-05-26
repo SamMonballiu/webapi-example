@@ -46,8 +46,20 @@ namespace BooksService_WebApi.Controllers
         }
 
         [HttpGet]
-        public List<Author> Get() => authorRepository.GetAll().ToList();
+        public List<AuthorViewModel> Get()
+        {
+            var authors = authorRepository.GetAll().Include(x => x.Books).ToList();
+            List<AuthorViewModel> auth = new List<AuthorViewModel>();
+            authors.ForEach(a => auth.Add(new AuthorViewModel() { Id = a.Id, Name = a.Name, Books = a.Books }));
+            return auth;
+        }
 
-
+        public sealed class AuthorViewModel
+        {
+            public int Id { get; set; }
+            public string Name { get; set; }
+            public ICollection<Book> Books { get; set; }
+        }
+        
     }
 }

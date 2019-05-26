@@ -19,6 +19,10 @@ namespace BooksService_WebApi
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            // https://stackoverflow.com/questions/7397207/json-net-error-self-referencing-loop-detected-for-type
+            // config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+
         }
     }
 }

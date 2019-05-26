@@ -5,14 +5,19 @@ namespace DataLayer
 
     public class BooksContext : DbContext
     {
+        public BooksContext(string connectionString) : base(connectionString) { }
+
         public BooksContext()
-            : base("name=BooksContext")
+            // :base(@"data source=DESKTOP-7LUT7NB\SQLEXPRESS;initial catalog=Books;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework")
+            : base("name=BooksContextAlternate")
         {
             Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+            
         }
 
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Author> Authors { get; set; }
+    public DbSet<Book> Books { get; set; }
+    public DbSet<Author> Authors { get; set; }
 
-    }
+}
 }
