@@ -21,6 +21,8 @@ namespace BooksService_WebApi
             );
 
             // https://stackoverflow.com/questions/7397207/json-net-error-self-referencing-loop-detected-for-type
+            // better to add [JsonIgnore] (for JSON) and [IgnoreDataMember] (for XML) as 
+            // attributes on Navigation Properties in the classes themselves.
             // config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
 
         }

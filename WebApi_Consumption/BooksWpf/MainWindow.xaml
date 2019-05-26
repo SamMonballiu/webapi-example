@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BooksWpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" SizeToContent="WidthAndHeight" Background="#eee">
     <Grid Margin="20">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -13,22 +13,20 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0" Margin="20">
-            <ComboBox x:Name="cbAuthors"/>
-            <StackPanel Orientation="Horizontal" Margin="0 12 0 0">
-                <Label>Name:</Label>
-                <TextBox MinWidth="200"  x:Name="txtNewAuthor"/>
-                <Button Width="80" x:Name="btnAddAuthor" Click="btnAddAuthor_Click">Create</Button>
-            </StackPanel>
+            <Label FontSize="24" Content="Authors"/>
+            <ComboBox x:Name="cbAuthors" SelectionChanged="cbAuthors_SelectionChanged"/>
+            <Label>Name:</Label>
+            <TextBox MinWidth="200"  x:Name="txtNewAuthor"/>
+            <Button Margin="0 12 0 0" Padding="4" x:Name="btnAddAuthor" HorizontalAlignment="Right" Click="btnAddAuthor_Click">Add new author</Button>
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="20">
+            <Label FontSize="24" Content="Books"/>
             <ComboBox x:Name="cbBooks"/>
-            <StackPanel Orientation="Horizontal" Margin="0 12 0 0">
-                <Label>Name:</Label>
-                <TextBox MinWidth="200"  x:Name="txtNewBook"/>
-                <Button Width="80" x:Name="btnNewBook" Click="btnNewBook_Click">Link</Button>
+            <Label>New book title for selected author:</Label>
+            <TextBox MinWidth="200"  x:Name="txtNewBook"/>
+            <Button Margin="0 12 0 0" Padding="4" HorizontalAlignment="Right" x:Name="btnNewBook" Click="btnNewBook_Click">Link book to author</Button>
 
-            </StackPanel>
         </StackPanel>
     </Grid>
 </Window>

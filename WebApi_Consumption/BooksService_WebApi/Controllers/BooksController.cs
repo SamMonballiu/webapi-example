@@ -32,6 +32,19 @@ namespace BooksService_WebApi.Controllers
         [HttpPost]
         public bool AddBookWithAuthor(Book model)
         {
+            var author = model.Author ?? authorRepository.GetAll().Include(x => x.Books).FirstOrDefault(a => a.Id == model.AuthorId);
+            if (author.Books.Any(book => book.Name.ToLower() == model.Name.ToLower()))
+            {
+                string bookAlreadyExistsForAuthor = $"A book named '{model.Name}' already exists for author {author.Name}";
+                var response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                {
+                    Content = new StringContent(bookAlreadyExistsForAuthor),
+                    ReasonPhrase = bookAlreadyExistsForAuthor
+                };
+
+                throw new HttpResponseException(response);
+            }
+
             if (ModelState.IsValid)
             {
                 bookRepository.Add(model);
