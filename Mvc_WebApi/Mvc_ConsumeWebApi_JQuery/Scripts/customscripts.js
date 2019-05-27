@@ -3,10 +3,16 @@
     function DisplayResult1(call, data) {
         $('#result').append("<strong>" + call + "<strong>" + "<br/>");
 
-        $.each(data, function (i, item) {
+        $.each(data, function (i, bk) {
 
-            $('#result').append(JSON.stringify(item));
+            var jsonString = '{ "title":"' + bk.Title + '", "author": "' + bk.Author + '", "publicationyear":' + bk.PublicationYear + '}';
+            var book = JSON.parse(jsonString);
+            
+            $('#result').append("<div>");
+            $('#result').append("<h3>" + book.title + "</h3>");
+            $('#result').append("<p> By <strong>" + book.author + "</strong></p>");
             $('#result').append("<br/>");
+            $('#result').append("</div>");
         });
     };
 
