@@ -5,13 +5,14 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Mvc_WebApi.Controllers
 {
+    //[EnableCors(origins: "http://localhost:56497", headers: "*", methods: "*")]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BooksController : ApiController
     {
-        
-
         private static List<Book> books = new List<Book>()
         {
             new Book {

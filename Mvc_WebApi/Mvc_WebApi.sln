@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc_WebApi", "Mvc_WebApi\Mv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc_ConsumeWebApiDemo", "Mvc_ConsumeWebApiDemo\Mvc_ConsumeWebApiDemo.csproj", "{6E4DB9E9-8757-489F-A16C-914C39B74E70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mvc_ConsumeWebApi_JQuery", "Mvc_ConsumeWebApi_JQuery\Mvc_ConsumeWebApi_JQuery.csproj", "{C8EAAD05-B052-456C-B85B-BB2CE26E11D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6E4DB9E9-8757-489F-A16C-914C39B74E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E4DB9E9-8757-489F-A16C-914C39B74E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E4DB9E9-8757-489F-A16C-914C39B74E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8EAAD05-B052-456C-B85B-BB2CE26E11D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8EAAD05-B052-456C-B85B-BB2CE26E11D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8EAAD05-B052-456C-B85B-BB2CE26E11D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8EAAD05-B052-456C-B85B-BB2CE26E11D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

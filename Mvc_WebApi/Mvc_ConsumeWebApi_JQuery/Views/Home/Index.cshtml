@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "GUI Front-End";
+}
+
+
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Inputs</h2>
+        <input type="text" name="id" id="id" class="form-control" placeholder="Id" />
+        <input type="text" name="title" id="title" class="form-control" placeholder="Title" />
+        <input type="text" name="author" id="author" class="form-control" placeholder="Author" />
+        <input type="text" name="publicationyear" id="publicationyear" class="form-control" placeholder="Publication year" />
+        <input type="text" name="isavailable" id="isavailable" class="form-control" placeholder="Available" />
+        <input type="text" name="callnumber" id="callnumber" class="form-control" placeholder="CallNumber" />
+    </div>
+
+    <div class="col-md-3">
+        <h2>Actions</h2>
+        <button type="button" id="GetAll" class="btn-default btn">Get all books</button>
+        <br />
+        <button type="button" id="GetById" class="btn-default btn">Get book by ID</button>
+        <br />
+        <button type="button" id="AddBook" class="btn-default btn">Add book</button>
+        <br />
+        <button type="button" id="UpdateBook" class="btn-default btn">Update book</button>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h3>Result</h3>
+        <p id="result"></p>
+    </div>
+</div>
