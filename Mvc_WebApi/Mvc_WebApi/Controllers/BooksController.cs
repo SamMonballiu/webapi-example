@@ -10,6 +10,8 @@ namespace Mvc_WebApi.Controllers
 {
     public class BooksController : ApiController
     {
+        
+
         private static List<Book> books = new List<Book>()
         {
             new Book {
@@ -61,7 +63,7 @@ namespace Mvc_WebApi.Controllers
 
         [HttpGet]
         [Route("Api/Books/GetByAuthor/{author}")]
-        // GET api/books?author=hosseini
+        // GET api/books/GetByAuthor/hosseini
         public Book Get(string author)
         {
             return books.Find(book => book.Author.ToLower().Contains(author.ToLower()));
