@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Mvc_ConsumeWebApiDemo.Models.Book>
+
+@{
+    ViewBag.Title = "GetBooks";
+}
+
+<h2>GetBooks</h2>
+<div class="text-danger">
+    @Html.ValidationSummary()
+</div>
+
+@Html.ActionLink("Create New", "Create")
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PublicationYear)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsAvailable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CallNumber)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublicationYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsAvailable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CallNumber)
+            </td>
+        </tr>
+    }
+
+
+
+
+</table>
