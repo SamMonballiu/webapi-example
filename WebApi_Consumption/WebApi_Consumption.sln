@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksWpf", "BooksWpf\BooksW
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrchestrationLayer", "OrchestrationLayer\OrchestrationLayer.csproj", "{2FFF71F8-D50F-4AE7-9832-E3CB476FE4B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BooksMvc", "BooksMvc\BooksMvc.csproj", "{590AB68B-4729-4BE9-AB87-939AF2D62979}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2FFF71F8-D50F-4AE7-9832-E3CB476FE4B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FFF71F8-D50F-4AE7-9832-E3CB476FE4B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FFF71F8-D50F-4AE7-9832-E3CB476FE4B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{590AB68B-4729-4BE9-AB87-939AF2D62979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{590AB68B-4729-4BE9-AB87-939AF2D62979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{590AB68B-4729-4BE9-AB87-939AF2D62979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{590AB68B-4729-4BE9-AB87-939AF2D62979}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

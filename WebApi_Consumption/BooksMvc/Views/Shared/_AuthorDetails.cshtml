@@ -1,0 +1,10 @@
+﻿@model DataLayer.Models.Author
+
+<h3>@Model.Name</h3>
+<h5>Books: (@Model.Books.Count())</h5>
+<ul>
+    @foreach (var book in Model.Books)
+    {
+        <li>@book.Name (@book.PublicationYear)</li>
+    }
+</ul>

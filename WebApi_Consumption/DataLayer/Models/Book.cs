@@ -11,10 +11,10 @@ namespace DataLayer.Models
     {
         public int Id { get; set; }
 
-        [Required, StringLength(50)]
+        [Required, StringLength(50), Display(Name="Title")]
         public string Name { get; set; }
 
-        [Required]
+        [Required, Display(Name="Year of publication")]
         public int PublicationYear { get; set; }
 
         public int AuthorId { get; set; }
