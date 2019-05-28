@@ -1,13 +1,10 @@
-﻿using BooksService_WebApi.Models;
-using DataLayer.Models;
-using System;
+﻿using DataLayer.Models;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Data.Entity;
-using DataLayer;
 
 namespace BooksService_WebApi.Controllers
 {
@@ -28,7 +25,6 @@ namespace BooksService_WebApi.Controllers
         [HttpGet]
         public Book GetBooks(int id) => bookRepository.Get(id);
 
-        
         [HttpPost]
         public bool AddBookWithAuthor(Book model)
         {
@@ -69,5 +65,20 @@ namespace BooksService_WebApi.Controllers
                 return bookRepository.Save() > 0;
             }
         }
+
+        [HttpPut]
+        public bool Update(Book model)
+        {
+            var id = model.Id;
+            if (GetBooks(id) != null)
+            {
+                Delete(id);
+                var result = AddBookWithAuthor(model);
+                return result;
+            }
+
+            return false;
+        }
+
     }
 }

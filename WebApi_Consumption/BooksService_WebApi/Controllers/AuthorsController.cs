@@ -21,7 +21,7 @@ namespace BooksService_WebApi.Controllers
         }
 
         [HttpPost]
-        public bool CreateAuthor(Author author)
+        public IHttpActionResult CreateAuthor(Author author)
         {
             bool authorAlreadyExists = authorRepository.Find(x => x.Name.ToLower() == author.Name.ToLower()).Count() > 0;
 
@@ -39,11 +39,37 @@ namespace BooksService_WebApi.Controllers
             if (ModelState.IsValid)
             {
                 authorRepository.Add(author);
-                return authorRepository.Save() > 0;
+                return Ok(authorRepository.Save() > 0);
+                
             }
 
-            return false;
+            return InternalServerError();
         }
+
+        //[HttpPost]
+        //public bool CreateAuthor(Author author)
+        //{
+        //    bool authorAlreadyExists = authorRepository.Find(x => x.Name.ToLower() == author.Name.ToLower()).Count() > 0;
+
+        //    if (authorAlreadyExists)
+        //    {
+        //        var response = new HttpResponseMessage(HttpStatusCode.InternalServerError)
+        //        {
+        //            Content = new StringContent($"An author named '{author.Name}' already exists."),
+        //            ReasonPhrase = $"An author named '{author.Name}' already exists."
+        //        };
+
+        //        throw new HttpResponseException(response);
+        //    }
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        authorRepository.Add(author);
+        //        return authorRepository.Save() > 0;
+        //    }
+
+        //    return false;
+        //}
 
         [HttpGet]
         public List<Author> Get()
