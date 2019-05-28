@@ -32,5 +32,38 @@ namespace BooksMvc.Controllers
             return View(vm);
         }
 
+        public ActionResult Edit(int id)
+        {
+            var book = bookService.GetBook(id).Result;
+            var authors = bookService.GetAuthors().Result;
+            var viewModel = new EditBookViewModel()
+            {
+                AvailableAuthors = new SelectList(authors, "Id", "Name"),
+                SelectedBook = book
+            };
+
+            if (viewModel.SelectedBook != null)
+            {
+                return View(viewModel);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Edit(EditBookViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var newAuthor = bookService.GetAuthor(model.SelectedAuthorId).Result;
+                model.SelectedBook.Author = newAuthor;
+                bookService.UpdateBook(model.SelectedBook).Wait();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(model);
+        }
+
     }
 }

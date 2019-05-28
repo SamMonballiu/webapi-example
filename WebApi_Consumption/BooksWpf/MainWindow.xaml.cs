@@ -70,7 +70,7 @@ namespace BooksWpf
             if (txtNewAuthor.Text == String.Empty) { return; }
             try
             {
-                var response = await bookService.AddAuthor(txtNewAuthor.Text);
+                var response = await bookService.CreateAuthor(txtNewAuthor.Text);
                 if (response.IsSuccessStatusCode)
                 {
                     await UpdateAuthorComboBox();

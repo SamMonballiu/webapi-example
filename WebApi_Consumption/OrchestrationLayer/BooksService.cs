@@ -51,7 +51,7 @@ namespace OrchestrationLayer
                 try
                 {
                     HttpResponseMessage response = client.GetAsync("api/Books").Result;
-                    var books = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Book>>(await response.Content.ReadAsStringAsync());
+                    var books = JsonConvert.DeserializeObject<List<Book>>(await response.Content.ReadAsStringAsync());
                     return books;
                 }
                 catch (JsonSerializationException) { return null; }
@@ -59,7 +59,42 @@ namespace OrchestrationLayer
             }
         }
 
-        public async Task<HttpResponseMessage> AddAuthor(string name)
+        public async Task<Book> GetBook(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                InitializeClient(client);
+
+                try
+                {
+                    HttpResponseMessage response = client.GetAsync("api/Books/"+ id).Result;
+                    var book = JsonConvert.DeserializeObject<Book>(await response.Content.ReadAsStringAsync());
+                    return book;
+                }
+                catch (JsonSerializationException) { return null; }
+                catch (Exception) { throw; }
+            }
+        }
+
+        public async Task<Author> GetAuthor(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                InitializeClient(client);
+
+                try
+                {
+                    HttpResponseMessage response = client.GetAsync("api/Authors/" + id).Result;
+                    var readString = await response.Content.ReadAsStringAsync();
+                    var author = JsonConvert.DeserializeObject<Author>(readString);
+                    return author;
+                }
+                catch (JsonSerializationException ex) { return null; }
+                catch (Exception) { throw; }
+            }
+        }
+
+        public async Task<HttpResponseMessage> CreateAuthor(string name)
         {
             using (var client = new HttpClient())
             {
@@ -73,7 +108,20 @@ namespace OrchestrationLayer
                 }
                 catch (Exception) { throw; }
             }
+        }
 
+        public async Task<HttpResponseMessage> UpdateBook(Book model)
+        {
+            using (var client = new HttpClient())
+            {
+                InitializeClient(client);
+                try
+                {
+                    HttpResponseMessage response = await client.PutAsJsonAsync("api/Books", model);
+                    return response;
+                }
+                catch (Exception) { throw; }
+            }
         }
 
         public async Task<HttpResponseMessage> CreateNewBookWithAuthor(Author author, string bookName)

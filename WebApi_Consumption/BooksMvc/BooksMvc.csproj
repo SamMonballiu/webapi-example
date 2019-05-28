@@ -173,6 +173,7 @@
     </Compile>
     <Compile Include="Models\AuthorsViewModel.cs" />
     <Compile Include="Models\BooksViewModel.cs" />
+    <Compile Include="Models\EditBookViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -219,6 +220,7 @@
     <Content Include="Views\Shared\_AuthorDetails.cshtml" />
     <Content Include="Views\Shared\_BookDetails.cshtml" />
     <Content Include="Views\Authors\Index.cshtml" />
+    <Content Include="Views\Books\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
