@@ -118,5 +118,24 @@ namespace Mvc_WebApi.Controllers
             // return the list of books.
             return books;
         }
+
+        [HttpGet]
+        [Route("api/Books/Authors/{name}")]
+        public IHttpActionResult GetBooksByAuthor(string name)
+        {
+            var bookList = books.Where(x => x.Author.ToLower().Contains(name.ToLower()));
+
+            // if the bookList is empty
+            if (!bookList.Any())
+            {
+                return NotFound();
+            }
+
+            // if the bookList is not empty
+            return Ok(bookList);
+
+            //// shorter notation
+            //return !bookList.Any() ? (IHttpActionResult)NotFound() : Ok(bookList);
+        }
     }
 }
