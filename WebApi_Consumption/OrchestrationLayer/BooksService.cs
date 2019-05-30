@@ -89,7 +89,7 @@ namespace OrchestrationLayer
                     var author = JsonConvert.DeserializeObject<Author>(readString);
                     return author;
                 }
-                catch (JsonSerializationException ex) { return null; }
+                //catch (JsonSerializationException ex) { return null; }
                 catch (Exception) { throw; }
             }
         }
@@ -124,14 +124,14 @@ namespace OrchestrationLayer
             }
         }
 
-        public async Task<HttpResponseMessage> CreateNewBookWithAuthor(Author author, string bookName)
+        public async Task<HttpResponseMessage> CreateNewBookWithAuthor(Author author, string bookName, int publicationYear = 2000)
         {
             var newBook = new Book()
             {
                 AuthorId = author.Id,
                 Name = bookName,
                 // TODO Implement this properly
-                PublicationYear = 2000
+                PublicationYear = publicationYear
             };
 
             using (var client = new HttpClient())

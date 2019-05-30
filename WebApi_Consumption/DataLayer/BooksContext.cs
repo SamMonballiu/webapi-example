@@ -9,7 +9,7 @@ namespace DataLayer
 
         public BooksContext()
             // :base(@"data source=DESKTOP-7LUT7NB\SQLEXPRESS;initial catalog=Books;integrated security=True;MultipleActiveResultSets=True;App=EntityFramework")
-            : base("name=BooksContext")
+            : base("name=BooksContextAlternate")
         {
             Configuration.LazyLoadingEnabled = false;
             Configuration.ProxyCreationEnabled = false;

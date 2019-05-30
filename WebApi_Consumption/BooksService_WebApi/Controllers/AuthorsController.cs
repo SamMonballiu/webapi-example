@@ -1,5 +1,4 @@
 ﻿using DataLayer.Models;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -76,5 +75,8 @@ namespace BooksService_WebApi.Controllers
         {
             return authorRepository.GetAll().Include(x => x.Books).ToList();
         }
+
+        [HttpGet, Route("api/Authors/{id}")]
+        public Author Get(int id) => authorRepository.Get(id);
     }
 }

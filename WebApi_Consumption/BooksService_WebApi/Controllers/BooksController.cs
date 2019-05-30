@@ -70,9 +70,11 @@ namespace BooksService_WebApi.Controllers
         public bool Update(Book model)
         {
             var id = model.Id;
-            if (GetBooks(id) != null)
+            var book = GetBooks(id);
+            if (book != null)
             {
                 Delete(id);
+                //model.Author = authorRepository.GetAll().FirstOrDefault(x => x.Id == model.AuthorId);
                 var result = AddBookWithAuthor(model);
                 return result;
             }

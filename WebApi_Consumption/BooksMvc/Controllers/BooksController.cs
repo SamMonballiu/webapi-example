@@ -57,6 +57,7 @@ namespace BooksMvc.Controllers
             {
                 var newAuthor = bookService.GetAuthor(model.SelectedAuthorId).Result;
                 model.SelectedBook.Author = newAuthor;
+                model.SelectedBook.AuthorId = model.SelectedAuthorId;
                 bookService.UpdateBook(model.SelectedBook).Wait();
 
                 return RedirectToAction("Index");
