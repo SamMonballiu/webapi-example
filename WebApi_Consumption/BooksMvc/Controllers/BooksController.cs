@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Threading.Tasks;
 
 namespace BooksMvc.Controllers
 {
@@ -51,14 +52,14 @@ namespace BooksMvc.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(EditBookViewModel model)
+        public async Task<ActionResult> Edit(EditBookViewModel model)
         {
             if (ModelState.IsValid)
             {
                 var newAuthor = bookService.GetAuthor(model.SelectedAuthorId).Result;
                 model.SelectedBook.Author = newAuthor;
                 model.SelectedBook.AuthorId = model.SelectedAuthorId;
-                bookService.UpdateBook(model.SelectedBook).Wait();
+                await bookService.UpdateBook(model.SelectedBook);
 
                 return RedirectToAction("Index");
             }
