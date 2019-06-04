@@ -31,14 +31,18 @@
                         @Html.DisplayFor(modelItem => author.Name)
                     </td>
                     <td>
-                        <ul>
-                            @foreach (var book in author.Books)
-                            {
-                                <li>
-                                    @Html.ActionLink(book.Name, "Index", "Authors", new { id = book.Id }, null)
-                                </li>
-                            }
-                        </ul>
+                        @foreach (var book in author.Books)
+                        {
+                            @Ajax.ActionLink(book.Name, "Details", "Books",
+                                       new { id = book.Id },
+                                       new AjaxOptions
+                                       {
+                                           InsertionMode = InsertionMode.Replace,
+                                           UpdateTargetId = "detailsPanel"
+                                       },
+                                       //new { @class = "btn btn-info btn-xs"})
+                                       null )
+                        }
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = author.Id }) |
@@ -52,12 +56,12 @@
 
     </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-12">
-        @if (Model.SelectedBook != null)
-        {
-            @Html.Partial("_BookDetails", Model.SelectedBook)
-        }
+    <div class="col-lg-4 col-md-4 col-sm-12" id="detailsPanel">
+
     </div>
 </div>
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/ajax")
+}

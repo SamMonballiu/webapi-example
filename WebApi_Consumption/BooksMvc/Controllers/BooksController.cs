@@ -67,5 +67,18 @@ namespace BooksMvc.Controllers
             return View(model);
         }
 
+        public ActionResult Details(int id)
+        {
+            var book = bookService.GetBook(id).Result;
+            book.Author = bookService.GetAuthor(book.AuthorId).Result;
+
+            if (book != null)
+            {
+                return PartialView("_BookDetails", book);
+            }
+
+            return View("Error");
+        }
+
     }
 }
