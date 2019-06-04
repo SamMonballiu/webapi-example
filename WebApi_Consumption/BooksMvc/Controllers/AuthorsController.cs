@@ -1,8 +1,5 @@
 ﻿using BooksMvc.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace BooksMvc.Controllers
@@ -28,6 +25,18 @@ namespace BooksMvc.Controllers
             }
 
             return View(vm);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var author = bookService.GetAuthor(id).Result;
+            author.Books = (bookService.GetBooks().Result).Where(bk => bk.AuthorId == author.Id).ToList();
+            if (author != null)
+            {
+                return PartialView("_AuthorDetails", author);
+            }
+
+            return View("Error");
         }
     }
 }

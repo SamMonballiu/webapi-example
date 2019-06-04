@@ -33,7 +33,15 @@
                         @Html.DisplayFor(modelItem => item.Name)
                     </td>
                     <td>
-                        @Html.ActionLink(item.Author.Name, "Index", "Books", new { id = item.AuthorId }, null)
+                        @Ajax.ActionLink(item.Author.Name, "Details", "Authors",
+                                   new { id = item.Author.Id },
+                                   new AjaxOptions
+                                   {
+                                       InsertionMode = InsertionMode.Replace,
+                                       UpdateTargetId = "detailsPanel"
+                                   },
+                                   //new { @class = "btn btn-info btn-xs"})
+                                   null )
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PublicationYear)
@@ -49,10 +57,11 @@
         </table>
     </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-12">
-        @if (Model.SelectedAuthor != null)
-        {
-            @Html.Partial("_AuthorDetails", Model.SelectedAuthor)
-        }
+    <div class="col-lg-4 col-md-4 col-sm-12" id="detailsPanel">
+        
     </div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/ajax")
+    }
