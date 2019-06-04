@@ -5,8 +5,7 @@
     var aut = new DataLayer.Models.Author();
 }
 
-<h2>Authors</h2>
-
+<h1>Authors</h1>
 <p>
     @Ajax.ActionLink("Add an author", "Create", "Authors",
                                            null,
@@ -17,6 +16,8 @@
                                            },
                                            new { @class = "btn btn-info"})
 </p>
+
+
 
 <div class="row">
     <div class="col-lg-8 col-md-8 col-sm-12">
@@ -43,15 +44,15 @@
                             foreach (var book in author.Books)
                             {
                                 <p>
-                                @Ajax.ActionLink(book.Name, "Details", "Books",
-                                           new { id = book.Id },
-                                           new AjaxOptions
-                                           {
-                                               InsertionMode = InsertionMode.Replace,
-                                               UpdateTargetId = "detailsPanel"
-                                           },
-                                           //new { @class = "btn btn-info btn-xs"})
-                                           null )
+                                    @Ajax.ActionLink(book.Name, "Details", "Books",
+                                               new { id = book.Id },
+                                               new AjaxOptions
+                                               {
+                                                   InsertionMode = InsertionMode.Replace,
+                                                   UpdateTargetId = "detailsPanel"
+                                               },
+                                               //new { @class = "btn btn-info btn-xs"})
+                                               null )
                                 </p>
                             }
                         }
@@ -82,6 +83,29 @@
 
     </div>
 </div>
+
+@if (ViewBag.PageCount > 1)
+{
+    <ul class="pagination">
+
+        <li class="@(ViewBag.CurrentPage > 1 ? "page-item" : "disabled")">
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">&laquo;</a>
+        </li>
+
+        @for (int i = 1; i <= ViewBag.PageCount; i++)
+        {
+            string classes = i == ViewBag.CurrentPage ? "page-item active" : "page-item";
+
+            <li class="@classes">
+                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+            </li>
+        }
+
+        <li class="@(ViewBag.CurrentPage < ViewBag.PageCount ? "page-item" : "disabled")">
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">&raquo;</a>
+        </li>
+    </ul>
+}
 
 
 @section Scripts {

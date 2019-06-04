@@ -15,7 +15,7 @@
         @Html.HiddenFor(model => model.SelectedBook.Id)
 
         <!-- TITLE -->
-        <div class="form-group">
+        <div class="form-group ">
             @Html.LabelFor(model => model.SelectedBook.Name, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SelectedBook.Name, new { htmlAttributes = new { @class = "form-control" } })
