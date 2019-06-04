@@ -16,10 +16,21 @@ namespace BooksMvc.Controllers
         {
             var authors = bookService.GetAuthors().Result;
             var books = bookService.GetBooks().Result;
+            int itemsPerPage = 10;
 
-            int productsPerPage = 10;
+            ViewBag.PageCount = Math.Ceiling(authors.Count() / (double)itemsPerPage);
+            if (page < 0)
+            {
+                page = 0;
+            }
+
+            if (page > ViewBag.PageCount)
+            {
+                page = (int)ViewBag.PageCount;
+            }
+
             ViewBag.CurrentPage = page;
-            int start = (page - 1) * productsPerPage;
+            int start = (page - 1) * itemsPerPage;
 
             //for (int i = authors.Count; i < 150; i++)
             //{
@@ -33,7 +44,7 @@ namespace BooksMvc.Controllers
 
             var vm = new AuthorsViewModel()
             {
-                Authors = authors.Skip(start).Take(productsPerPage).ToList(),
+                Authors = authors.Skip(start).Take(itemsPerPage).ToList(),
                 SelectedBook = id == null ? null : books.Find(x => x.Id == id)
             };
 
@@ -42,7 +53,6 @@ namespace BooksMvc.Controllers
                 vm.SelectedBook.Author = authors.Find(x => x.Id == vm.SelectedBook.AuthorId);
             }
 
-            ViewBag.PageCount = Math.Ceiling(authors.Count() / (double)productsPerPage);
             return View(vm);
         }
 

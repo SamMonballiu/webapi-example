@@ -6,21 +6,44 @@
 }
 
 <h1>Authors</h1>
-<p>
-    @Ajax.ActionLink("Add an author", "Create", "Authors",
-                                           null,
-                                           new AjaxOptions
-                                           {
-                                               InsertionMode = InsertionMode.Replace,
-                                               UpdateTargetId = "detailsPanel"
-                                           },
-                                           new { @class = "btn btn-info"})
-</p>
+@*<p>
+        @Ajax.ActionLink("Add", "Create", "Authors",
+                                               null,
+                                               new AjaxOptions
+                                               {
+                                                   InsertionMode = InsertionMode.Replace,
+                                                   UpdateTargetId = "detailsPanel"
+                                               },
+                                               new { @class = "btn btn-info btn-xs"})
 
+    </p>*@
+
+@if (ViewBag.PageCount > 1)
+{
+    <ul class="pagination pagination-sm">
+
+        <li class="@(ViewBag.CurrentPage > 1 ? "page-item" : "disabled")">
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">&laquo;</a>
+        </li>
+
+        @for (int i = 1; i <= ViewBag.PageCount; i++)
+        {
+            string classes = i == ViewBag.CurrentPage ? "page-item active" : "page-item";
+
+            <li class="@classes">
+                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+            </li>
+        }
+
+        <li class="@(ViewBag.CurrentPage < ViewBag.PageCount ? "page-item" : "disabled")">
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })">&raquo;</a>
+        </li>
+    </ul>
+}
 
 
 <div class="row">
-    <div class="col-lg-7 col-md-7 col-sm-12">
+    <div class="col-lg-7 col-md-7 col-sm-12" style="height:400px; overflow-y:auto">
         <table class="table table-hover">
             <tr>
                 <th>
@@ -55,7 +78,9 @@
                                 </p>
                             }
                         }
-                        @Ajax.ActionLink("Add a book", "Create", "Books",
+                    </td>
+                    <td>
+                        @Ajax.ActionLink("Add Book", "Create", "Books",
                                        null,
                                        //new { id = book.Id },
                                        new AjaxOptions
@@ -63,7 +88,7 @@
                                            InsertionMode = InsertionMode.Replace,
                                            UpdateTargetId = "detailsPanel"
                                        },
-                                       new { @class = "btn btn-info btn-xs"})
+                                       new { @class = "btn btn-primary btn-xs"})
 
                     </td>
                 </tr>
@@ -80,7 +105,7 @@
 
 @if (ViewBag.PageCount > 1)
 {
-    <ul class="pagination">
+    <ul class="pagination pagination-sm">
 
         <li class="@(ViewBag.CurrentPage > 1 ? "page-item" : "disabled")">
             <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">&laquo;</a>
@@ -96,7 +121,7 @@
         }
 
         <li class="@(ViewBag.CurrentPage < ViewBag.PageCount ? "page-item" : "disabled")">
-            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">&raquo;</a>
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })">&raquo;</a>
         </li>
     </ul>
 }
