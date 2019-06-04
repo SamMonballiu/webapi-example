@@ -23,7 +23,7 @@
     <ul class="pagination pagination-sm">
 
         <li class="@(ViewBag.CurrentPage > 1 ? "page-item" : "disabled")">
-            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">&laquo;</a>
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage > 1 ? ViewBag.CurrentPage - 1 : 1 })">&laquo;</a>
         </li>
 
         @for (int i = 1; i <= ViewBag.PageCount; i++)
@@ -36,7 +36,7 @@
         }
 
         <li class="@(ViewBag.CurrentPage < ViewBag.PageCount ? "page-item" : "disabled")">
-            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })">&raquo;</a>
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage == ViewBag.PageCount ? ViewBag.CurrentPage : ViewBag.CurrentPage + 1 })">&raquo;</a>
         </li>
     </ul>
 }
@@ -73,8 +73,7 @@
                                                    InsertionMode = InsertionMode.Replace,
                                                    UpdateTargetId = "detailsPanel"
                                                },
-                                               //new { @class = "btn btn-info btn-xs"})
-                                               null )
+                                               new { style="text-decoration:none"})
                                 </p>
                             }
                         }
@@ -108,7 +107,7 @@
     <ul class="pagination pagination-sm">
 
         <li class="@(ViewBag.CurrentPage > 1 ? "page-item" : "disabled")">
-            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage - 1 })">&laquo;</a>
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage > 1 ? ViewBag.CurrentPage - 1 : 1 })">&laquo;</a>
         </li>
 
         @for (int i = 1; i <= ViewBag.PageCount; i++)
@@ -121,7 +120,7 @@
         }
 
         <li class="@(ViewBag.CurrentPage < ViewBag.PageCount ? "page-item" : "disabled")">
-            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage + 1 })">&raquo;</a>
+            <a href="@Url.Action("Index", new { page = ViewBag.CurrentPage == ViewBag.PageCount ? ViewBag.CurrentPage : ViewBag.CurrentPage + 1 })">&raquo;</a>
         </li>
     </ul>
 }
