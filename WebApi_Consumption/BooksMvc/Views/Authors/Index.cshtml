@@ -8,7 +8,14 @@
 <h2>Authors</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Ajax.ActionLink("Add an author", "Create", "Authors",
+                                           null,
+                                           new AjaxOptions
+                                           {
+                                               InsertionMode = InsertionMode.Replace,
+                                               UpdateTargetId = "detailsPanel"
+                                           },
+                                           new { @class = "btn btn-info"})
 </p>
 
 <div class="row">
@@ -31,18 +38,33 @@
                         @Html.DisplayFor(modelItem => author.Name)
                     </td>
                     <td>
-                        @foreach (var book in author.Books)
+                        @if (author.Books.Count != 0)
                         {
-                            @Ajax.ActionLink(book.Name, "Details", "Books",
-                                       new { id = book.Id },
+                            foreach (var book in author.Books)
+                            {
+                                <p>
+                                @Ajax.ActionLink(book.Name, "Details", "Books",
+                                           new { id = book.Id },
+                                           new AjaxOptions
+                                           {
+                                               InsertionMode = InsertionMode.Replace,
+                                               UpdateTargetId = "detailsPanel"
+                                           },
+                                           //new { @class = "btn btn-info btn-xs"})
+                                           null )
+                                </p>
+                            }
+                        }
+                        @Ajax.ActionLink("Add a book", "Create", "Books",
+                                       null,
+                                       //new { id = book.Id },
                                        new AjaxOptions
                                        {
                                            InsertionMode = InsertionMode.Replace,
                                            UpdateTargetId = "detailsPanel"
                                        },
-                                       //new { @class = "btn btn-info btn-xs"})
-                                       null )
-                        }
+                                       new { @class = "btn btn-info btn-xs"})
+
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = author.Id }) |

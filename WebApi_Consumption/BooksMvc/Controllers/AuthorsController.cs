@@ -1,5 +1,7 @@
 ﻿using BooksMvc.Models;
+using DataLayer.Models;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace BooksMvc.Controllers
@@ -37,6 +39,18 @@ namespace BooksMvc.Controllers
             }
 
             return View("Error");
+        }
+
+        public ActionResult Create()
+        {
+            return PartialView("_CreateAuthor");
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(Author model)
+        {
+            await bookService.CreateAuthor(model.Name);
+            return RedirectToAction("Index");
         }
     }
 }

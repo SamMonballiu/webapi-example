@@ -2,5 +2,5 @@
 
 <h3>@Model.Name</h3>
 <h5>Author: @Html.ActionLink(Model.Author.Name, "Details", "Authors", new { id = Model.AuthorId }, null)</h5>
-<h5>@Html.DisplayNameFor(x => x.PublicationYear)</h5>
-<p>@Html.DisplayFor(x => x.PublicationYear)</p>
+<p>@Html.DisplayNameFor(x => x.PublicationYear): 
+@Html.DisplayFor(x => x.PublicationYear)</p>

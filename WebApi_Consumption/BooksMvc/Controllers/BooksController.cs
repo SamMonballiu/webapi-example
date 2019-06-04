@@ -37,11 +37,14 @@ namespace BooksMvc.Controllers
         {
             var book = bookService.GetBook(id).Result;
             var authors = bookService.GetAuthors().Result;
+            var currentAuthor = authors.FirstOrDefault(x => x.Id == book.AuthorId);
             var viewModel = new EditBookViewModel()
             {
-                AvailableAuthors = new SelectList(authors, "Id", "Name"),
+                AvailableAuthors = new SelectList(items: authors, dataTextField: "Name", dataValueField: "Id", selectedValue: authors.First(x => x.Id == book.AuthorId)),
                 SelectedBook = book
             };
+            
+            
 
             if (viewModel.SelectedBook != null)
             {
@@ -80,5 +83,24 @@ namespace BooksMvc.Controllers
             return View("Error");
         }
 
+        [HttpGet]
+        public ActionResult Create()
+        {
+            var vm = new EditBookViewModel()
+            {
+                AvailableAuthors = new SelectList(bookService.GetAuthors().Result, "Id", "Name"),
+                SelectedBook = new Book()
+            };
+
+            return PartialView("_CreateBook", vm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Create(EditBookViewModel model)
+        {
+            var author = bookService.GetAuthor(model.SelectedAuthorId).Result;
+            await bookService.CreateNewBookWithAuthor(author, model.SelectedBook.Name, model.SelectedBook.PublicationYear);
+            return RedirectToAction("Index");
+        }
     }
 }

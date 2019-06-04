@@ -1,0 +1,59 @@
+﻿@model BooksMvc.Models.EditBookViewModel
+
+@{
+    ViewBag.Title = "_CreateBook";
+}
+
+<h2>Add a book</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.SelectedBook.Id)
+
+        <!-- TITLE -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedBook.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectedBook.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SelectedBook.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- PUBLICATION YEAR -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedBook.PublicationYear, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SelectedBook.PublicationYear, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.SelectedBook.PublicationYear, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!-- AUTHOR -->
+        <div class="form-group">
+            @Html.LabelFor(model => new DataLayer.Models.Author().Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(
+                    m => m.SelectedAuthorId,
+                    Model.AvailableAuthors,
+                    
+                    new { @class = "form-control", id = "authorsList"}
+               )
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+
+        @Html.HiddenFor(x => x.SelectedBook.AuthorId)
+    </div>
+}
+
+
