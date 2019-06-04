@@ -20,8 +20,8 @@
 
 
 <div class="row">
-    <div class="col-lg-8 col-md-8 col-sm-12">
-        <table class="table">
+    <div class="col-lg-7 col-md-7 col-sm-12">
+        <table class="table table-hover">
             <tr>
                 <th>
                     @Html.DisplayNameFor(model => aut.Name)
@@ -29,7 +29,6 @@
                 <th>
                     @Html.DisplayNameFor(model => aut.Books)
                 </th>
-                <th></th>
             </tr>
 
             @foreach (var author in Model.Authors)
@@ -67,11 +66,6 @@
                                        new { @class = "btn btn-info btn-xs"})
 
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = author.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = author.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = author.Id })
-                    </td>
                 </tr>
             }
 
@@ -79,7 +73,7 @@
 
     </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-12" id="detailsPanel">
+    <div class="col-lg-5 col-md-5 col-sm-12" id="detailsPanel">
 
     </div>
 </div>
